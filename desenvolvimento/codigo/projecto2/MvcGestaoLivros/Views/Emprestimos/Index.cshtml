@@ -1,0 +1,142 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.EmprestimoModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<h2>Histórico de Emprestimos</h2>
+
+<p>
+    <a href="@Url.Action("Index", "Utentes")" class="btn btn-info">
+        <i class="glyphicon glyphicon-user"></i> Utentes
+    </a>
+</p>
+<table class="table table-bordered ">
+    <thead class=" table-heading ">
+
+
+        <tr style=" background-color: black; color: white;">
+            <th>
+                @Html.DisplayNameFor(model => model.id_emprestimo)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.data_requisicao_emprestimo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data_devolucao_emprestimo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data_entrega_emprestimo)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.status_emprestimo)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.obs_emprestimo)
+            </th>
+
+
+            <th>&emsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;   Operações  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id_emprestimo)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.data_requisicao_emprestimo)
+    </td>
+    @if (item.status_emprestimo.Contains("Aprovado"))
+    {
+        <td class="text-success">
+            @Html.DisplayFor(modelItem => item.data_requisicao_emprestimo)
+        </td>
+    }
+    else
+    {
+        <td class="text-warning">
+            @Html.DisplayName("00/00/0000")
+        </td>
+    }
+
+    <td>
+        @Html.DisplayFor(modelItem => item.data_entrega_emprestimo)
+    </td>
+
+    @if (item.status_emprestimo.Contains("Aprovado"))
+    {
+        <td class="text-success">
+            @Html.DisplayFor(modelItem => item.status_emprestimo)
+        </td>
+    }
+    else if (item.status_emprestimo.Contains("Em Análise"))
+    {
+        <td class="text-warning">
+            @Html.DisplayFor(modelItem => item.status_emprestimo)
+        </td>
+
+    }
+    else if (item.status_emprestimo.Contains("Recusado"))
+    {
+        <td class="text-danger">
+            @Html.DisplayFor(modelItem => item.status_emprestimo)
+        </td>
+
+    }
+
+    <td>
+        @Html.DisplayFor(modelItem => item.obs_emprestimo)
+    </td>
+
+
+
+    <td>
+
+        <a href="@Url.Action("Details", "Emprestimos", new { id = item.id_emprestimo})" class="btn btn-info"> <i class="glyphicon glyphicon-user"> </i></a>
+
+        @if (Session["id_utente"] == null && (int)Session["id_funcionario"] > 0)
+        {
+            if (!item.status_emprestimo.Contains("Recusado") && !item.status_emprestimo.Contains("Aprovado"))
+            {
+                <a class="btn btn-danger" href="@Url.Action("Aprovar", "Emprestimos", new { id = item.id_emprestimo })" onclick="return confirm('Tem a certeza que deseja Recusar o pedido?');">
+                    <i class="glyphicon glyphicon-ban-circle"> </i> Recusar </a>
+
+                <a href="@Url.Action("Aprovar", "Emprestimos", new { id = item.id_emprestimo, flag = true})"
+                   onclick="return confirm('Tem a certeza que deseja Aprovar o pedido?');" class="btn btn-success"> <i class="glyphicon glyphicon-check"> </i> Aprovar</a>
+
+            }
+        }
+        
+        @*                <a href="url_to_delete" onclick="return confirm('Tem a certeza que deseja Aprovar o pedido?');" class="btn btn-success"> <i class="glyphicon glyphicon-check"> </i>Delet</a>
+        *@
+
+    </td>
+</tr>
+    }
+
+</table>
+
+<script>
+
+    $('a.twitter').confirm({
+        content: "...",
+    });
+    $('a.twitter').confirm({
+        buttons: {
+            hey: function () {
+                location.href = this.$target.attr('href');
+            }
+        }
+    });
+</script>

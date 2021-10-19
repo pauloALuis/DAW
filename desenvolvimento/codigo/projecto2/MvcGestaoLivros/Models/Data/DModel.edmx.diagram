@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ccda2b042c44b609c656d177c09f306" Name="Diagram1">
+        <EntityTypeShape EntityType="dbMiniProj2Model.login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbMiniProj2Model.Funcionario" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="dbMiniProj2Model.Utente" Width="1.5" PointX="3" PointY="5.125" />
+        <AssociationConnector Association="dbMiniProj2Model.FK_Funcionarios_logins" />
+        <AssociationConnector Association="dbMiniProj2Model.FK_Utentes_logins" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

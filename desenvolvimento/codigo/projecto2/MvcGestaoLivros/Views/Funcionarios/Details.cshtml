@@ -1,0 +1,68 @@
+﻿@model MvcGestaoLivros.Models.Funcionarios
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Funcionarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cc_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cc_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_nascimento_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_nascimento_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contato_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contato_funcionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_funcionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_funcionario)
+        </dd>
+
+      
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.id_funcionario }) |
+    @Html.ActionLink("Voltar a lista", "Index")
+</p>

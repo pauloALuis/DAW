@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbMiniProj2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Funcionarios">
+          <Key>
+            <PropertyRef Name="id_funcionario" />
+          </Key>
+          <Property Name="nome_funcionario" Type="nvarchar" MaxLength="100" />
+          <Property Name="cc_funcionario" Type="nvarchar" MaxLength="100" />
+          <Property Name="data_nascimento_funcionario" Type="datetime" />
+          <Property Name="email_funcionario" Type="nvarchar" MaxLength="100" />
+          <Property Name="contato_funcionario" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_funcionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_login" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="logins">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="flagAtiva" Type="bit" />
+          <Property Name="privilegio" Type="bit" />
+        </EntityType>
+        <EntityType Name="Utentes">
+          <Key>
+            <PropertyRef Name="id_utente" />
+          </Key>
+          <Property Name="id_utente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome_utente" Type="nvarchar" MaxLength="100" />
+          <Property Name="endereco_utente" Type="nvarchar" MaxLength="100" />
+          <Property Name="dta_nascim_utente" Type="datetime" />
+          <Property Name="num_tlm_utente" Type="int" />
+          <Property Name="id_login" Type="int" />
+        </EntityType>
+        <Association Name="FK_Funcionarios_logins">
+          <End Role="logins" Type="Self.logins" Multiplicity="1" />
+          <End Role="Funcionarios" Type="Self.Funcionarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logins">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Funcionarios">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utentes_logins">
+          <End Role="logins" Type="Self.logins" Multiplicity="0..1" />
+          <End Role="Utentes" Type="Self.Utentes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="logins">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Utentes">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_CreateFuncionario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="passworduser" Type="nvarchar" Mode="In" />
+          <Parameter Name="nome_funcionario" Type="nvarchar" Mode="In" />
+          <Parameter Name="cc_funcionario" Type="nvarchar" Mode="In" />
+          <Parameter Name="data_nascimento_funcionario" Type="datetime" Mode="In" />
+          <Parameter Name="contato_funcionario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CreateUtente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="passworduser" Type="nvarchar" Mode="In" />
+          <Parameter Name="nome_utente" Type="nvarchar" Mode="In" />
+          <Parameter Name="endereco_utente" Type="nvarchar" Mode="In" />
+          <Parameter Name="dta_nascim_utente" Type="datetime" Mode="In" />
+          <Parameter Name="num_tlm_utente" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="dbMiniProj2ModelStoreContainer">
+          <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="logins" EntityType="Self.logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utentes" EntityType="Self.Utentes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Funcionarios_logins" Association="Self.FK_Funcionarios_logins">
+            <End Role="logins" EntitySet="logins" />
+            <End Role="Funcionarios" EntitySet="Funcionarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utentes_logins" Association="Self.FK_Utentes_logins">
+            <End Role="logins" EntitySet="logins" />
+            <End Role="Utentes" EntitySet="Utentes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbMiniProj2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="flagAtiva" Type="Boolean" />
+          <Property Name="privilegio" Type="Boolean" />
+          <NavigationProperty Name="Funcionarios" Relationship="dbMiniProj2Model.FK_Funcionarios_logins" FromRole="login" ToRole="Funcionario" />
+          <NavigationProperty Name="Utentes" Relationship="dbMiniProj2Model.FK_Utentes_logins" FromRole="login" ToRole="Utente" />
+        </EntityType>
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="logins" EntityType="Self.login" />
+          <FunctionImport Name="sp_CreateFuncionario" ReturnType="Collection(dbMiniProj2Model.sp_CreateFuncionario_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="passworduser" Mode="In" Type="String" />
+            <Parameter Name="nome_funcionario" Mode="In" Type="String" />
+            <Parameter Name="cc_funcionario" Mode="In" Type="String" />
+            <Parameter Name="data_nascimento_funcionario" Mode="In" Type="DateTime" />
+            <Parameter Name="contato_funcionario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CreateUtente" ReturnType="Collection(dbMiniProj2Model.sp_CreateUtente_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="passworduser" Mode="In" Type="String" />
+            <Parameter Name="nome_utente" Mode="In" Type="String" />
+            <Parameter Name="endereco_utente" Mode="In" Type="String" />
+            <Parameter Name="dta_nascim_utente" Mode="In" Type="DateTime" />
+            <Parameter Name="num_tlm_utente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Funcionarios" EntityType="dbMiniProj2Model.Funcionario" />
+          <EntitySet Name="Utentes" EntityType="dbMiniProj2Model.Utente" />
+          <AssociationSet Name="FK_Funcionarios_logins" Association="dbMiniProj2Model.FK_Funcionarios_logins">
+            <End Role="login" EntitySet="logins" />
+            <End Role="Funcionario" EntitySet="Funcionarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utentes_logins" Association="dbMiniProj2Model.FK_Utentes_logins">
+            <End Role="login" EntitySet="logins" />
+            <End Role="Utente" EntitySet="Utentes" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="sp_CreateFuncionario_Result">
+          <Property Type="Int32" Name="id_funcionario" Nullable="false" />
+          <Property Type="String" Name="nome_funcionario" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="cc_funcionario" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="data_nascimento_funcionario" Nullable="true" Precision="23" />
+          <Property Type="String" Name="contato_funcionario" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="passworduser" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="privilegio" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="flagAtiva" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_CreateUtente_Result">
+          <Property Type="Int32" Name="id_utente" Nullable="false" />
+          <Property Type="String" Name="nome_utente" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="endereco_utente" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="dta_nascim_utente" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="num_tlm_utente" Nullable="true" />
+          <Property Type="String" Name="username" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="passworduser" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="privilegio" Nullable="true" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="flagAtiva" Nullable="true" />
+          <Property Type="Int32" Name="id_login" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="id_funcionario" />
+          </Key>
+          <Property Name="nome_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cc_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="data_nascimento_funcionario" Type="DateTime" Precision="3" />
+          <Property Name="email_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contato_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_funcionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_login" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="login" Relationship="dbMiniProj2Model.FK_Funcionarios_logins" FromRole="Funcionario" ToRole="login" />
+        </EntityType>
+        <EntityType Name="Utente">
+          <Key>
+            <PropertyRef Name="id_utente" />
+          </Key>
+          <Property Name="id_utente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome_utente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="endereco_utente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dta_nascim_utente" Type="DateTime" Precision="3" />
+          <Property Name="num_tlm_utente" Type="Int32" />
+          <Property Name="id_login" Type="Int32" />
+          <NavigationProperty Name="login" Relationship="dbMiniProj2Model.FK_Utentes_logins" FromRole="Utente" ToRole="login" />
+        </EntityType>
+        <Association Name="FK_Funcionarios_logins">
+          <End Type="dbMiniProj2Model.login" Role="login" Multiplicity="1" />
+          <End Type="dbMiniProj2Model.Funcionario" Role="Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utentes_logins">
+          <End Type="dbMiniProj2Model.login" Role="login" Multiplicity="0..1" />
+          <End Type="dbMiniProj2Model.Utente" Role="Utente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Utente">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbMiniProj2ModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="logins">
+            <EntityTypeMapping TypeName="dbMiniProj2Model.login">
+              <MappingFragment StoreEntitySet="logins">
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+                <ScalarProperty Name="privilegio" ColumnName="privilegio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CreateFuncionario" FunctionName="dbMiniProj2Model.Store.sp_CreateFuncionario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbMiniProj2Model.sp_CreateFuncionario_Result">
+                <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+                <ScalarProperty Name="nome_funcionario" ColumnName="nome_funcionario" />
+                <ScalarProperty Name="cc_funcionario" ColumnName="cc_funcionario" />
+                <ScalarProperty Name="data_nascimento_funcionario" ColumnName="data_nascimento_funcionario" />
+                <ScalarProperty Name="contato_funcionario" ColumnName="contato_funcionario" />
+                <ScalarProperty Name="passworduser" ColumnName="passworduser" />
+                <ScalarProperty Name="privilegio" ColumnName="privilegio" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CreateUtente" FunctionName="dbMiniProj2Model.Store.sp_CreateUtente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbMiniProj2Model.sp_CreateUtente_Result">
+                <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+                <ScalarProperty Name="nome_utente" ColumnName="nome_utente" />
+                <ScalarProperty Name="endereco_utente" ColumnName="endereco_utente" />
+                <ScalarProperty Name="dta_nascim_utente" ColumnName="dta_nascim_utente" />
+                <ScalarProperty Name="num_tlm_utente" ColumnName="num_tlm_utente" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="passworduser" ColumnName="passworduser" />
+                <ScalarProperty Name="privilegio" ColumnName="privilegio" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Funcionarios">
+            <EntityTypeMapping TypeName="dbMiniProj2Model.Funcionario">
+              <MappingFragment StoreEntitySet="Funcionarios">
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+                <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+                <ScalarProperty Name="contato_funcionario" ColumnName="contato_funcionario" />
+                <ScalarProperty Name="email_funcionario" ColumnName="email_funcionario" />
+                <ScalarProperty Name="data_nascimento_funcionario" ColumnName="data_nascimento_funcionario" />
+                <ScalarProperty Name="cc_funcionario" ColumnName="cc_funcionario" />
+                <ScalarProperty Name="nome_funcionario" ColumnName="nome_funcionario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utentes">
+            <EntityTypeMapping TypeName="dbMiniProj2Model.Utente">
+              <MappingFragment StoreEntitySet="Utentes">
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+                <ScalarProperty Name="num_tlm_utente" ColumnName="num_tlm_utente" />
+                <ScalarProperty Name="dta_nascim_utente" ColumnName="dta_nascim_utente" />
+                <ScalarProperty Name="endereco_utente" ColumnName="endereco_utente" />
+                <ScalarProperty Name="nome_utente" ColumnName="nome_utente" />
+                <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

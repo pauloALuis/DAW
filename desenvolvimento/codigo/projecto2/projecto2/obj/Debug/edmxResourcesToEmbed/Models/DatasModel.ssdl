@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autores">
+    <Key>
+      <PropertyRef Name="id_autor" />
+    </Key>
+    <Property Name="id_autor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome_autor" Type="nvarchar" MaxLength="100" />
+    <Property Name="email_autor" Type="nvarchar" MaxLength="100" />
+    <Property Name="obs_autor" Type="nvarchar(max)" />
+    <Property Name="dataNascimento_autor" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Details_Emprestimo">
+    <Key>
+      <PropertyRef Name="id_Details_Empres" />
+    </Key>
+    <Property Name="id_Details_Empres" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_emprestimo" Type="int" />
+    <Property Name="id_livro" Type="int" />
+  </EntityType>
+  <EntityType Name="Emprestimos">
+    <Key>
+      <PropertyRef Name="id_emprestimo" />
+    </Key>
+    <Property Name="id_emprestimo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_utente" Type="int" Nullable="false" />
+    <Property Name="data_requisicao_emprestimo" Type="datetime" />
+    <Property Name="data_devolucao_emprestimo" Type="datetime" />
+    <Property Name="data_entrega_emprestimo" Type="datetime" />
+    <Property Name="obs_emprestimo" Type="nvarchar(max)" />
+    <Property Name="status_emprestimo" Type="nvarchar" MaxLength="100" />
+    <Property Name="multa_valor_emprestimo" Type="varchar" MaxLength="50" />
+    <Property Name="flagAtiva" Type="bit" />
+  </EntityType>
+  <EntityType Name="Funcionarios">
+    <Key>
+      <PropertyRef Name="id_funcionario" />
+    </Key>
+    <Property Name="nome_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="cc_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="data_nascimento_funcionario" Type="datetime" />
+    <Property Name="email_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="contato_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_funcionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Livro_Autor">
+    <Key>
+      <PropertyRef Name="livroAutorID" />
+    </Key>
+    <Property Name="livroAutorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_livro" Type="int" Nullable="false" />
+    <Property Name="id_autor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Livros">
+    <Key>
+      <PropertyRef Name="id_livro" />
+    </Key>
+    <Property Name="id_livro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo_livro" Type="nvarchar" MaxLength="200" />
+    <Property Name="editorProdutora_livro" Type="nvarchar" MaxLength="100" />
+    <Property Name="genero_livro" Type="nvarchar" MaxLength="100" />
+    <Property Name="flagAtivo" Type="bit" />
+    <Property Name="qtd_livro" Type="int" />
+    <Property Name="obs_livro" Type="nvarchar(max)" />
+    <Property Name="isbn_livro" Type="bigint" Nullable="false" />
+    <Property Name="numpaginas_livro" Type="int" />
+    <Property Name="piccapa_livro" Type="image" />
+  </EntityType>
+  <EntityType Name="logins">
+    <Key>
+      <PropertyRef Name="id_login" />
+    </Key>
+    <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_utente" Type="int" />
+    <Property Name="id_funcionario" Type="int" />
+    <Property Name="flagAtiva" Type="bit" />
+    <Property Name="privilegio" Type="bit" />
+  </EntityType>
+  <EntityType Name="Utentes">
+    <Key>
+      <PropertyRef Name="id_utente" />
+    </Key>
+    <Property Name="id_utente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome_utente" Type="nvarchar" MaxLength="100" />
+    <Property Name="endereco_utente" Type="nvarchar" MaxLength="100" />
+    <Property Name="dta_nascim_utente" Type="datetime" />
+    <Property Name="num_tlm_utente" Type="int" />
+  </EntityType>
+  <Association Name="FK__Details_E__id_em__36B12243">
+    <End Role="Emprestimos" Type="Self.Emprestimos" Multiplicity="0..1" />
+    <End Role="Details_Emprestimo" Type="Self.Details_Emprestimo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emprestimos">
+        <PropertyRef Name="id_emprestimo" />
+      </Principal>
+      <Dependent Role="Details_Emprestimo">
+        <PropertyRef Name="id_emprestimo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailsEm__idLiv__34C8D9D1">
+    <End Role="Livros" Type="Self.Livros" Multiplicity="0..1" />
+    <End Role="Details_Emprestimo" Type="Self.Details_Emprestimo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livros">
+        <PropertyRef Name="id_livro" />
+      </Principal>
+      <Dependent Role="Details_Emprestimo">
+        <PropertyRef Name="id_livro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Emprestim__id_ut__3B75D760">
+    <End Role="Utentes" Type="Self.Utentes" Multiplicity="1" />
+    <End Role="Emprestimos" Type="Self.Emprestimos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utentes">
+        <PropertyRef Name="id_utente" />
+      </Principal>
+      <Dependent Role="Emprestimos">
+        <PropertyRef Name="id_utente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Livro_Aut__id_au__3A81B327">
+    <End Role="Autores" Type="Self.Autores" Multiplicity="1" />
+    <End Role="Livro_Autor" Type="Self.Livro_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autores">
+        <PropertyRef Name="id_autor" />
+      </Principal>
+      <Dependent Role="Livro_Autor">
+        <PropertyRef Name="id_autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LivroAuto__idLiv__2B3F6F97">
+    <End Role="Livros" Type="Self.Livros" Multiplicity="1" />
+    <End Role="Livro_Autor" Type="Self.Livro_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livros">
+        <PropertyRef Name="id_livro" />
+      </Principal>
+      <Dependent Role="Livro_Autor">
+        <PropertyRef Name="id_livro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__logins__id_funci__403A8C7D">
+    <End Role="Funcionarios" Type="Self.Funcionarios" Multiplicity="0..1" />
+    <End Role="logins" Type="Self.logins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionarios">
+        <PropertyRef Name="id_funcionario" />
+      </Principal>
+      <Dependent Role="logins">
+        <PropertyRef Name="id_funcionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__logins__id_utent__38996AB5">
+    <End Role="Utentes" Type="Self.Utentes" Multiplicity="0..1" />
+    <End Role="logins" Type="Self.logins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utentes">
+        <PropertyRef Name="id_utente" />
+      </Principal>
+      <Dependent Role="logins">
+        <PropertyRef Name="id_utente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_criarLivroAutor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idbook" Type="int" Mode="In" />
+    <Parameter Name="titulo_livro" Type="nvarchar" Mode="In" />
+    <Parameter Name="editorProdutora_livro" Type="nvarchar" Mode="In" />
+    <Parameter Name="genero_livro" Type="nvarchar" Mode="In" />
+    <Parameter Name="qtd_livro" Type="int" Mode="In" />
+    <Parameter Name="obs_livro" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="isbn_livro" Type="bigint" Mode="In" />
+    <Parameter Name="numpaginas_livro" Type="int" Mode="In" />
+    <Parameter Name="piccapa_livro" Type="image" Mode="In" />
+    <Parameter Name="nome_autor" Type="nvarchar" Mode="In" />
+    <Parameter Name="email_autor" Type="nvarchar" Mode="In" />
+    <Parameter Name="obs_autor" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="dataNascimento_autor" Type="datetime" Mode="In" />
+    <Parameter Name="flagAtivo_livro" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="sp_getAllEmprestimos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_GetEmprestimo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="emprestimoID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetEmprestimoUtente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="utenteID" Type="int" Mode="In" />
+    <Parameter Name="emprestimoID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_getLivro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="livroID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ListaLivroAutores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_procurarLivro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tituloLivro" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Autores" EntityType="Self.Autores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Details_Emprestimo" EntityType="Self.Details_Emprestimo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emprestimos" EntityType="Self.Emprestimos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livro_Autor" EntityType="Self.Livro_Autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Livros" EntityType="Self.Livros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logins" EntityType="Self.logins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utentes" EntityType="Self.Utentes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Details_E__id_em__36B12243" Association="Self.FK__Details_E__id_em__36B12243">
+      <End Role="Emprestimos" EntitySet="Emprestimos" />
+      <End Role="Details_Emprestimo" EntitySet="Details_Emprestimo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailsEm__idLiv__34C8D9D1" Association="Self.FK__DetailsEm__idLiv__34C8D9D1">
+      <End Role="Livros" EntitySet="Livros" />
+      <End Role="Details_Emprestimo" EntitySet="Details_Emprestimo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Emprestim__id_ut__3B75D760" Association="Self.FK__Emprestim__id_ut__3B75D760">
+      <End Role="Utentes" EntitySet="Utentes" />
+      <End Role="Emprestimos" EntitySet="Emprestimos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Livro_Aut__id_au__3A81B327" Association="Self.FK__Livro_Aut__id_au__3A81B327">
+      <End Role="Autores" EntitySet="Autores" />
+      <End Role="Livro_Autor" EntitySet="Livro_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LivroAuto__idLiv__2B3F6F97" Association="Self.FK__LivroAuto__idLiv__2B3F6F97">
+      <End Role="Livros" EntitySet="Livros" />
+      <End Role="Livro_Autor" EntitySet="Livro_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__logins__id_funci__403A8C7D" Association="Self.FK__logins__id_funci__403A8C7D">
+      <End Role="Funcionarios" EntitySet="Funcionarios" />
+      <End Role="logins" EntitySet="logins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__logins__id_utent__38996AB5" Association="Self.FK__logins__id_utent__38996AB5">
+      <End Role="Utentes" EntitySet="Utentes" />
+      <End Role="logins" EntitySet="logins" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

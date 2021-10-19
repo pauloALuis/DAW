@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbDsEntities">
+    <EntitySetMapping Name="Autores">
+      <EntityTypeMapping TypeName="dbModel.Autore">
+        <MappingFragment StoreEntitySet="Autores">
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="email_autor" ColumnName="email_autor" />
+          <ScalarProperty Name="obs_autor" ColumnName="obs_autor" />
+          <ScalarProperty Name="dataNascimento_autor" ColumnName="dataNascimento_autor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Details_Emprestimo">
+      <EntityTypeMapping TypeName="dbModel.Details_Emprestimo">
+        <MappingFragment StoreEntitySet="Details_Emprestimo">
+          <ScalarProperty Name="id_Details_Empres" ColumnName="id_Details_Empres" />
+          <ScalarProperty Name="id_emprestimo" ColumnName="id_emprestimo" />
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emprestimos">
+      <EntityTypeMapping TypeName="dbModel.Emprestimo">
+        <MappingFragment StoreEntitySet="Emprestimos">
+          <ScalarProperty Name="id_emprestimo" ColumnName="id_emprestimo" />
+          <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+          <ScalarProperty Name="data_requisicao_emprestimo" ColumnName="data_requisicao_emprestimo" />
+          <ScalarProperty Name="data_devolucao_emprestimo" ColumnName="data_devolucao_emprestimo" />
+          <ScalarProperty Name="data_entrega_emprestimo" ColumnName="data_entrega_emprestimo" />
+          <ScalarProperty Name="obs_emprestimo" ColumnName="obs_emprestimo" />
+          <ScalarProperty Name="status_emprestimo" ColumnName="status_emprestimo" />
+          <ScalarProperty Name="multa_valor_emprestimo" ColumnName="multa_valor_emprestimo" />
+          <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funcionarios">
+      <EntityTypeMapping TypeName="dbModel.Funcionario">
+        <MappingFragment StoreEntitySet="Funcionarios">
+          <ScalarProperty Name="nome_funcionario" ColumnName="nome_funcionario" />
+          <ScalarProperty Name="cc_funcionario" ColumnName="cc_funcionario" />
+          <ScalarProperty Name="data_nascimento_funcionario" ColumnName="data_nascimento_funcionario" />
+          <ScalarProperty Name="email_funcionario" ColumnName="email_funcionario" />
+          <ScalarProperty Name="contato_funcionario" ColumnName="contato_funcionario" />
+          <ScalarProperty Name="id_funcionario" ColumnName="id_funcionario" />
+          <ScalarProperty Name="id_login" ColumnName="id_login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livro_Autor">
+      <EntityTypeMapping TypeName="dbModel.Livro_Autor">
+        <MappingFragment StoreEntitySet="Livro_Autor">
+          <ScalarProperty Name="livroAutorID" ColumnName="livroAutorID" />
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livros">
+      <EntityTypeMapping TypeName="dbModel.Livro">
+        <MappingFragment StoreEntitySet="Livros">
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logins">
+      <EntityTypeMapping TypeName="dbModel.login">
+        <MappingFragment StoreEntitySet="logins">
+          <ScalarProperty Name="id_login" ColumnName="id_login" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+          <ScalarProperty Name="privilegio" ColumnName="privilegio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utentes">
+      <EntityTypeMapping TypeName="dbModel.Utente">
+        <MappingFragment StoreEntitySet="Utentes">
+          <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+          <ScalarProperty Name="nome_utente" ColumnName="nome_utente" />
+          <ScalarProperty Name="endereco_utente" ColumnName="endereco_utente" />
+          <ScalarProperty Name="dta_nascim_utente" ColumnName="dta_nascim_utente" />
+          <ScalarProperty Name="num_tlm_utente" ColumnName="num_tlm_utente" />
+          <ScalarProperty Name="id_login" ColumnName="id_login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_CreateFuncionario" FunctionName="dbModel.Store.sp_CreateFuncionario" />
+    <FunctionImportMapping FunctionImportName="sp_CreateUtente" FunctionName="dbModel.Store.sp_CreateUtente" />
+    <FunctionImportMapping FunctionImportName="sp_criarLivroAutor" FunctionName="dbModel.Store.sp_criarLivroAutor">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_criarLivroAutor_Result">
+          <ScalarProperty Name="id_Livro" ColumnName="id_Livro" />
+          <ScalarProperty Name="id_Autor" ColumnName="id_Autor" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="email_autor" ColumnName="email_autor" />
+          <ScalarProperty Name="obs_autor" ColumnName="obs_autor" />
+          <ScalarProperty Name="dataNascimento_autor" ColumnName="dataNascimento_autor" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getAllEmprestimos" FunctionName="dbModel.Store.sp_getAllEmprestimos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_getAllEmprestimos_Result">
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="id_emprestimo" ColumnName="id_emprestimo" />
+          <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+          <ScalarProperty Name="data_requisicao_emprestimo" ColumnName="data_requisicao_emprestimo" />
+          <ScalarProperty Name="data_devolucao_emprestimo" ColumnName="data_devolucao_emprestimo" />
+          <ScalarProperty Name="data_entrega_emprestimo" ColumnName="data_entrega_emprestimo" />
+          <ScalarProperty Name="obs_emprestimo" ColumnName="obs_emprestimo" />
+          <ScalarProperty Name="status_emprestimo" ColumnName="status_emprestimo" />
+          <ScalarProperty Name="multa_valor_emprestimo" ColumnName="multa_valor_emprestimo" />
+          <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+          <ScalarProperty Name="dta_nascim_utente" ColumnName="dta_nascim_utente" />
+          <ScalarProperty Name="num_tlm_utente" ColumnName="num_tlm_utente" />
+          <ScalarProperty Name="endereco_utente" ColumnName="endereco_utente" />
+          <ScalarProperty Name="nome_utente" ColumnName="nome_utente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEmprestimo" FunctionName="dbModel.Store.sp_GetEmprestimo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_GetEmprestimo_Result">
+          <ScalarProperty Name="id_emprestimo" ColumnName="id_emprestimo" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="data_requisicao_emprestimo" ColumnName="data_requisicao_emprestimo" />
+          <ScalarProperty Name="data_devolucao_emprestimo" ColumnName="data_devolucao_emprestimo" />
+          <ScalarProperty Name="data_entrega_emprestimo" ColumnName="data_entrega_emprestimo" />
+          <ScalarProperty Name="obs_emprestimo" ColumnName="obs_emprestimo" />
+          <ScalarProperty Name="status_emprestimo" ColumnName="status_emprestimo" />
+          <ScalarProperty Name="multa_valor_emprestimo" ColumnName="multa_valor_emprestimo" />
+          <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+          <ScalarProperty Name="id_utente" ColumnName="id_utente" />
+          <ScalarProperty Name="nome_utente" ColumnName="nome_utente" />
+          <ScalarProperty Name="endereco_utente" ColumnName="endereco_utente" />
+          <ScalarProperty Name="dta_nascim_utente" ColumnName="dta_nascim_utente" />
+          <ScalarProperty Name="num_tlm_utente" ColumnName="num_tlm_utente" />
+          <ScalarProperty Name="id_login" ColumnName="id_login" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetEmprestimoUtente" FunctionName="dbModel.Store.sp_GetEmprestimoUtente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_GetEmprestimoUtente_Result">
+          <ScalarProperty Name="id_emprestimo" ColumnName="id_emprestimo" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="data_requisicao_emprestimo" ColumnName="data_requisicao_emprestimo" />
+          <ScalarProperty Name="data_devolucao_emprestimo" ColumnName="data_devolucao_emprestimo" />
+          <ScalarProperty Name="data_entrega_emprestimo" ColumnName="data_entrega_emprestimo" />
+          <ScalarProperty Name="obs_emprestimo" ColumnName="obs_emprestimo" />
+          <ScalarProperty Name="status_emprestimo" ColumnName="status_emprestimo" />
+          <ScalarProperty Name="multa_valor_emprestimo" ColumnName="multa_valor_emprestimo" />
+          <ScalarProperty Name="flagAtiva" ColumnName="flagAtiva" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_getLivro" FunctionName="dbModel.Store.sp_getLivro">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_getLivro_Result">
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="obs_autor" ColumnName="obs_autor" />
+          <ScalarProperty Name="email_autor" ColumnName="email_autor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetUsers" FunctionName="dbModel.Store.sp_GetUsers" />
+    <FunctionImportMapping FunctionImportName="sp_ListaLivroAutores" FunctionName="dbModel.Store.sp_ListaLivroAutores">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_ListaLivroAutores_Result">
+          <ScalarProperty Name="id_Livro" ColumnName="id_Livro" />
+          <ScalarProperty Name="id_Autor" ColumnName="id_Autor" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="email_autor" ColumnName="email_autor" />
+          <ScalarProperty Name="obs_autor" ColumnName="obs_autor" />
+          <ScalarProperty Name="dataNascimento_autor" ColumnName="dataNascimento_autor" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_procurarLivro" FunctionName="dbModel.Store.sp_procurarLivro">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbModel.sp_procurarLivro_Result">
+          <ScalarProperty Name="id_livro" ColumnName="id_livro" />
+          <ScalarProperty Name="titulo_livro" ColumnName="titulo_livro" />
+          <ScalarProperty Name="editorProdutora_livro" ColumnName="editorProdutora_livro" />
+          <ScalarProperty Name="genero_livro" ColumnName="genero_livro" />
+          <ScalarProperty Name="flagAtivo" ColumnName="flagAtivo" />
+          <ScalarProperty Name="qtd_livro" ColumnName="qtd_livro" />
+          <ScalarProperty Name="obs_livro" ColumnName="obs_livro" />
+          <ScalarProperty Name="isbn_livro" ColumnName="isbn_livro" />
+          <ScalarProperty Name="numpaginas_livro" ColumnName="numpaginas_livro" />
+          <ScalarProperty Name="piccapa_livro" ColumnName="piccapa_livro" />
+          <ScalarProperty Name="nome_autor" ColumnName="nome_autor" />
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="obs_autor" ColumnName="obs_autor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

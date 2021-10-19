@@ -1,0 +1,221 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .gi-2x {
+        font-size: 2em;
+    }
+
+    .gi-3x {
+        font-size: 3em;
+    }
+
+    .gi-4x {
+        font-size: 4em;
+    }
+
+    .gi-5x {
+        font-size: 5em;
+    }
+
+    .red-color {
+        color: red;
+    }
+
+    .green-color {
+        color: green;
+    }
+
+    .yellow-color {
+        color: yellow;
+    }
+
+    .a {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Float four columns side by side */
+    .column {
+        float: left;
+        width: 25%;
+        padding: 0 5px;
+    }
+
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    /* Responsive columns */
+    /* Responsive columns
+     media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }*/
+
+
+    /* Style the counter cards */
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 16px;
+        text-align: center;
+        background-color: #444;
+        color: white;
+    }
+
+    .fa {
+        font-size: 50px;
+    }
+</style>
+
+@model IEnumerable<MvcGestaoLivros.Models.EmprestimoViewModel>
+
+@{
+    ViewBag.Title = "StatusOrder";
+}
+
+<h2>Estado da Encomenda</h2>
+
+<hr />
+<hr />
+
+
+
+<div>
+
+    <h3>Dados de envio</h3>
+    <hr />
+    <p><i><b>Nome Completo:</b> @TempData["nome_utente"]</i></p>
+    <p><b>Endereço:</b> @TempData["endereco"] </p>
+
+</div>
+<hr />
+<hr />
+
+<p><b>ID Encomenda :</b> @TempData["id_emprestimo"] </p>
+<p><b>data requisição:</b> @TempData["data_requisicao"] </p>
+<hr />
+
+<h4><p> Itens da encomenda: </p></h4>
+<hr />
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+
+        <li> 1 Un. - @Html.DisplayFor(modelItem => item.titulo_livro) </li>
+    }
+</ul>
+
+<hr />
+<hr />
+
+<h3>Estádo</h3>
+<hr />
+
+<p><b>Estado atualizado em </b>  <i id="dtAtual"></i></p>
+
+<br>
+
+<div class="row a">
+    <div class="column a">
+        <div class="card a">
+            <h3>Selecionar Livro</h3>
+            <p class="green-color"><i class="glyphicon glyphicon-book gi-2x"></i></p>
+            <h5 class="green-color">Feito</h5>
+        </div>
+    </div>
+
+
+    <div class="column a">
+        <div class="card a">
+            <h3>Confirmar Encomenda</h3>
+            @*<p><i class="fa fa-check a"></i></p>*@
+            <p class="green-color "> <i class="glyphicon glyphicon-book a gi-2x"></i></p>
+            <h5 class="green-color ">Feito</h5>
+        </div>
+    </div>
+    @*dssfsf*@
+    <div class="column a">
+        <div class="card a">
+            <h3>Análise do Pedido</h3>
+
+            @if (TempData["status_emprestimo"].ToString() == "Aprovado")
+            {
+                <p class="green-color"><i class="glyphicon glyphicon glyphicon-ok-circle a gi-2x"></i></p>
+                <h5 class="green-color">Aprovado</h5>
+            }
+            else if (TempData["status_emprestimo"].ToString() == "Recusado")
+            {
+                <p class="red-color"><i class="glyphicon glyphicon glyphicon-ban-circle a gi-2x"></i></p>
+                <h5 class="red-color">Recusado</h5>
+            }
+            else
+            {
+                <p class="yellow-color"><i class="glyphicon glyphicon-info-sign a gi-2x"></i></p>
+                <h5>Em Análise</h5>
+            }
+        </div>
+    </div>
+
+
+    <div class="column a">
+        <div class="card a">
+            <h3>Entrega</h3>
+            @if (TempData["status_emprestimo"].ToString() == "Aprovado")
+            {
+                <p><i class="fa fa-truck fa-2x a green-color "></i></p>
+                <h5 class="green-color">Enviado</h5>
+            }
+            else if (TempData["status_emprestimo"].ToString() == "Em Análise" || @TempData["status_emprestimo"].ToString() == "Recusado")
+            {
+                <p><i class="fa fa-truck gi-2x a yellow-color"></i></p>
+                <h5 class="yellow-color ">Aguardar</h5>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row align-items-end">
+    <div class="form-group col-5">
+        <p>
+            @if (Session["id_funcionario"] == null && Session["id_utente"] != null)
+            {
+                <a href="@Url.Action("Index", "Livros")" class="btn btn-warning btn-sm btn-block">
+                    <i class="glyphicon glyphicon-chevron-left"></i>  Voltar á Lista
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", "Emprestimos")" class="btn btn-warning btn-sm btn-block">
+                    <i class="glyphicon glyphicon-chevron-left"></i>  Voltar á Lista
+                </a>
+            }
+
+        </p>
+    </div>
+</div>
+
+
+<script>
+    n = new Date();
+    ns = new Date().toDateString();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("dtAtual").innerHTML = ns;
+</script>

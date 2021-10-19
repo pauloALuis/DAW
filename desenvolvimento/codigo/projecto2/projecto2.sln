@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "projecto2\api.csproj", "{8710BA2A-EB28-4F40-B5CF-6CFEDAA8C2BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcGestaoLivros", "MvcGestaoLivros\MvcGestaoLivros.csproj", "{255187B8-75A5-4781-B8FF-1BE749C485E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8710BA2A-EB28-4F40-B5CF-6CFEDAA8C2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8710BA2A-EB28-4F40-B5CF-6CFEDAA8C2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8710BA2A-EB28-4F40-B5CF-6CFEDAA8C2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8710BA2A-EB28-4F40-B5CF-6CFEDAA8C2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{255187B8-75A5-4781-B8FF-1BE749C485E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{255187B8-75A5-4781-B8FF-1BE749C485E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{255187B8-75A5-4781-B8FF-1BE749C485E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{255187B8-75A5-4781-B8FF-1BE749C485E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF5B068B-1972-43F4-9F6C-7FFA09465728}
+	EndGlobalSection
+EndGlobal

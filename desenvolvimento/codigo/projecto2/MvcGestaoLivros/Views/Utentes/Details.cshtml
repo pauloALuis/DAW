@@ -1,0 +1,121 @@
+﻿@model MvcGestaoLivros.Models.UtenteViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UtenteViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_utente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_utente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nome_utente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_utente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco_utente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco_utente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dta_nascim_utente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dta_nascim_utente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.num_tlm_utente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_tlm_utente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.password)*@
+            @Html.DisplayName("XXXXXXXXXX")
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.flagAtiva)
+        </dt>
+
+        @if (!(bool)Model.flagAtiva)
+        {
+
+
+            <dd>
+                @Html.DisplayName("Utente")
+            </dd>
+
+         }
+
+
+
+       
+
+    </dl>
+</div>
+    <div class="form-group col-5  col-md-5">
+
+        <p>
+            <a href="@Url.Action("Edit", "Utentes", new { id = Model.id_utente })" class="btn btn-warning btn-lg">
+                <i class="glyphicon glyphicon-edit"></i> Editar Dados
+            </a>
+        </p>
+    </div>
+
+
+@*
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id_utente })
+
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

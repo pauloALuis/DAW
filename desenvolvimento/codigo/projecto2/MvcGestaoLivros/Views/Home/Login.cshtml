@@ -1,0 +1,89 @@
+﻿@model MvcGestaoLivros.Models.Data.login
+<style>
+    .center1 {
+        margin: auto;
+        width: 60%;
+       
+        padding: 10px;
+    }
+</style>
+@{
+    ViewBag.Title = "Login";
+}
+<div class="center1">
+
+    <h2> Autenticação</h2>
+</div>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control password" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <h1 class="text-danger"></h1>
+            <p class="text-danger">@ViewBag.Notification</p>
+
+            @* <label> @ViewBag.Notification</label>*@
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-lg-3 ">
+
+                <p>
+                        @Html.ActionLink("Inscrever-se", "Signup")
+                </p>
+            </div>
+
+            <div class="col-lg-3">
+                <input type="submit" value="Entrar" class="btn btn-success  btn-lg glyphicon glyphicon-log-in" />
+            </div>
+
+        </div>
+    </div>
+
+
+    @*@Url.Action("SignUp", "Home")
+        
+        <div>
+            @Html.ActionLink("Inscrever-se", "Signup")
+        </div>*@
+
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

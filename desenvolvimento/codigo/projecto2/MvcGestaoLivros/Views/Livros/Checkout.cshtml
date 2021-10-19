@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-bordered border-primary table-hover">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayName("ID")
+            </th>
+            <th>
+                @Html.DisplayName("Título")
+            </th>
+
+            <th>
+                @Html.DisplayName("Qtd")
+            </th>
+            <th>
+                @Html.DisplayName("Outras Info")
+            </th>
+
+            <th>Operações</th>
+        </tr>
+
+    </thead>
+    @foreach (var item in Session["cart"] as List<MvcGestaoLivros.Models.LivroModel>)
+    {
+        <tr>
+            <td>
+                <h4>@item.id_livro</h4>
+            </td>
+            <td>
+                <h4>@item.titulo_livro </h4>
+            </td>
+
+            <td>
+                <h4>@item.qtd_livro</h4>
+            </td>
+            <td>
+                <h4>@item.obs_livro</h4>
+            </td>
+
+            <td>
+                <a href="@Url.Action("Details", "Livros", new { id = item.id_livro})" class="btn btn-primary"> <i class="glyphicon glyphicon-user"> </i></a>
+                <a href="@Url.Action("RemoveItem", "Livros",new {id = item.id_livro})" class="btn btn-danger"> <i class="glyphicon glyphicon-remove"> </i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="row align-items-end">
+    <div class="form-group col-5 col-md-5 ">
+
+        <p>
+            <a href="@Url.Action("Index", "Livros")" class="btn btn-warning btn-sm btn-block">
+                <i class="glyphicon glyphicon-chevron-left"></i>  Voltar á Lista
+            </a>
+        </p>
+    </div>
+    <div class="form-group col-5 col-md-5 ">
+
+
+
+        @if ((int)Session["qtdItens"] != 0)
+        {
+            <p>
+                <a href="@Url.Action("OrderFinish", "Livros")" class="btn btn-primary btn-sm btn-block">
+                    <i class="glyphicon glyphicon-check"></i>  Finalizar
+                </a>
+            </p>
+        }
+    </div>
+
+
+</div>
+
+    @*
+
+                                            <a href="@Url.Action("AddCart", "Livros",new {id = item.id_Livro })" class="btn btn-success"> <i class="glyphicon glyphicon-shopping-cart"> </i></a>
+
+
+                            <p>
+                @Html.ActionLink("Finalizar", "Create")
+            </p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Entrar" class="btn btn-default" />
+            </div>
+        </div>*@

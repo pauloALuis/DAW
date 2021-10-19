@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Autores">
+    <Key>
+      <PropertyRef Name="id_autor" />
+    </Key>
+    <Property Name="id_autor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome_autor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email_autor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="obs_autor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dataNascimento_autor" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Livro_Autor" Relationship="Self.FK__Livro_Aut__id_au__3A81B327" FromRole="Autores" ToRole="Livro_Autor" />
+  </EntityType>
+  <EntityType Name="Details_Emprestimo">
+    <Key>
+      <PropertyRef Name="id_Details_Empres" />
+    </Key>
+    <Property Name="id_Details_Empres" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_emprestimo" Type="Int32" />
+    <Property Name="id_livro" Type="Int32" />
+    <NavigationProperty Name="Emprestimos" Relationship="Self.FK__Details_E__id_em__36B12243" FromRole="Details_Emprestimo" ToRole="Emprestimos" />
+    <NavigationProperty Name="Livros" Relationship="Self.FK__DetailsEm__idLiv__34C8D9D1" FromRole="Details_Emprestimo" ToRole="Livros" />
+  </EntityType>
+  <EntityType Name="Emprestimos">
+    <Key>
+      <PropertyRef Name="id_emprestimo" />
+    </Key>
+    <Property Name="id_emprestimo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_utente" Type="Int32" Nullable="false" />
+    <Property Name="data_requisicao_emprestimo" Type="DateTime" Precision="3" />
+    <Property Name="data_devolucao_emprestimo" Type="DateTime" Precision="3" />
+    <Property Name="data_entrega_emprestimo" Type="DateTime" Precision="3" />
+    <Property Name="obs_emprestimo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="status_emprestimo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="multa_valor_emprestimo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="flagAtiva" Type="Boolean" />
+    <NavigationProperty Name="Details_Emprestimo" Relationship="Self.FK__Details_E__id_em__36B12243" FromRole="Emprestimos" ToRole="Details_Emprestimo" />
+    <NavigationProperty Name="Utentes" Relationship="Self.FK__Emprestim__id_ut__3B75D760" FromRole="Emprestimos" ToRole="Utentes" />
+  </EntityType>
+  <EntityType Name="Funcionarios">
+    <Key>
+      <PropertyRef Name="id_funcionario" />
+    </Key>
+    <Property Name="nome_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cc_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="data_nascimento_funcionario" Type="DateTime" Precision="3" />
+    <Property Name="email_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="contato_funcionario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="id_funcionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="logins" Relationship="Self.FK__logins__id_funci__403A8C7D" FromRole="Funcionarios" ToRole="logins" />
+  </EntityType>
+  <EntityType Name="Livro_Autor">
+    <Key>
+      <PropertyRef Name="livroAutorID" />
+    </Key>
+    <Property Name="livroAutorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_livro" Type="Int32" Nullable="false" />
+    <Property Name="id_autor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Autores" Relationship="Self.FK__Livro_Aut__id_au__3A81B327" FromRole="Livro_Autor" ToRole="Autores" />
+    <NavigationProperty Name="Livros" Relationship="Self.FK__LivroAuto__idLiv__2B3F6F97" FromRole="Livro_Autor" ToRole="Livros" />
+  </EntityType>
+  <EntityType Name="Livros">
+    <Key>
+      <PropertyRef Name="id_livro" />
+    </Key>
+    <Property Name="id_livro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo_livro" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="editorProdutora_livro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="genero_livro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="flagAtivo" Type="Boolean" />
+    <Property Name="qtd_livro" Type="Int32" />
+    <Property Name="obs_livro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isbn_livro" Type="Int64" Nullable="false" />
+    <Property Name="numpaginas_livro" Type="Int32" />
+    <Property Name="piccapa_livro" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Details_Emprestimo" Relationship="Self.FK__DetailsEm__idLiv__34C8D9D1" FromRole="Livros" ToRole="Details_Emprestimo" />
+    <NavigationProperty Name="Livro_Autor" Relationship="Self.FK__LivroAuto__idLiv__2B3F6F97" FromRole="Livros" ToRole="Livro_Autor" />
+  </EntityType>
+  <EntityType Name="logins">
+    <Key>
+      <PropertyRef Name="id_login" />
+    </Key>
+    <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="id_utente" Type="Int32" />
+    <Property Name="id_funcionario" Type="Int32" />
+    <Property Name="flagAtiva" Type="Boolean" />
+    <Property Name="privilegio" Type="Boolean" />
+    <NavigationProperty Name="Funcionarios" Relationship="Self.FK__logins__id_funci__403A8C7D" FromRole="logins" ToRole="Funcionarios" />
+    <NavigationProperty Name="Utentes" Relationship="Self.FK__logins__id_utent__38996AB5" FromRole="logins" ToRole="Utentes" />
+  </EntityType>
+  <EntityType Name="Utentes">
+    <Key>
+      <PropertyRef Name="id_utente" />
+    </Key>
+    <Property Name="id_utente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome_utente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="endereco_utente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="dta_nascim_utente" Type="DateTime" Precision="3" />
+    <Property Name="num_tlm_utente" Type="Int32" />
+    <NavigationProperty Name="Emprestimos" Relationship="Self.FK__Emprestim__id_ut__3B75D760" FromRole="Utentes" ToRole="Emprestimos" />
+    <NavigationProperty Name="logins" Relationship="Self.FK__logins__id_utent__38996AB5" FromRole="Utentes" ToRole="logins" />
+  </EntityType>
+  <Association Name="FK__Livro_Aut__id_au__3A81B327">
+    <End Role="Autores" Type="Self.Autores" Multiplicity="1" />
+    <End Role="Livro_Autor" Type="Self.Livro_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autores">
+        <PropertyRef Name="id_autor" />
+      </Principal>
+      <Dependent Role="Livro_Autor">
+        <PropertyRef Name="id_autor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Details_E__id_em__36B12243">
+    <End Role="Emprestimos" Type="Self.Emprestimos" Multiplicity="0..1" />
+    <End Role="Details_Emprestimo" Type="Self.Details_Emprestimo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Emprestimos">
+        <PropertyRef Name="id_emprestimo" />
+      </Principal>
+      <Dependent Role="Details_Emprestimo">
+        <PropertyRef Name="id_emprestimo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailsEm__idLiv__34C8D9D1">
+    <End Role="Livros" Type="Self.Livros" Multiplicity="0..1" />
+    <End Role="Details_Emprestimo" Type="Self.Details_Emprestimo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livros">
+        <PropertyRef Name="id_livro" />
+      </Principal>
+      <Dependent Role="Details_Emprestimo">
+        <PropertyRef Name="id_livro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Emprestim__id_ut__3B75D760">
+    <End Role="Utentes" Type="Self.Utentes" Multiplicity="1" />
+    <End Role="Emprestimos" Type="Self.Emprestimos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utentes">
+        <PropertyRef Name="id_utente" />
+      </Principal>
+      <Dependent Role="Emprestimos">
+        <PropertyRef Name="id_utente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__logins__id_funci__403A8C7D">
+    <End Role="Funcionarios" Type="Self.Funcionarios" Multiplicity="0..1" />
+    <End Role="logins" Type="Self.logins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionarios">
+        <PropertyRef Name="id_funcionario" />
+      </Principal>
+      <Dependent Role="logins">
+        <PropertyRef Name="id_funcionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LivroAuto__idLiv__2B3F6F97">
+    <End Role="Livros" Type="Self.Livros" Multiplicity="1" />
+    <End Role="Livro_Autor" Type="Self.Livro_Autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Livros">
+        <PropertyRef Name="id_livro" />
+      </Principal>
+      <Dependent Role="Livro_Autor">
+        <PropertyRef Name="id_livro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__logins__id_utent__38996AB5">
+    <End Role="Utentes" Type="Self.Utentes" Multiplicity="0..1" />
+    <End Role="logins" Type="Self.logins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utentes">
+        <PropertyRef Name="id_utente" />
+      </Principal>
+      <Dependent Role="logins">
+        <PropertyRef Name="id_utente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autores" EntityType="Self.Autores" />
+    <EntitySet Name="Details_Emprestimo" EntityType="Self.Details_Emprestimo" />
+    <EntitySet Name="Emprestimos" EntityType="Self.Emprestimos" />
+    <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" />
+    <EntitySet Name="Livro_Autor" EntityType="Self.Livro_Autor" />
+    <EntitySet Name="Livros" EntityType="Self.Livros" />
+    <EntitySet Name="logins" EntityType="Self.logins" />
+    <EntitySet Name="Utentes" EntityType="Self.Utentes" />
+    <AssociationSet Name="FK__Livro_Aut__id_au__3A81B327" Association="Self.FK__Livro_Aut__id_au__3A81B327">
+      <End Role="Autores" EntitySet="Autores" />
+      <End Role="Livro_Autor" EntitySet="Livro_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Details_E__id_em__36B12243" Association="Self.FK__Details_E__id_em__36B12243">
+      <End Role="Emprestimos" EntitySet="Emprestimos" />
+      <End Role="Details_Emprestimo" EntitySet="Details_Emprestimo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailsEm__idLiv__34C8D9D1" Association="Self.FK__DetailsEm__idLiv__34C8D9D1">
+      <End Role="Livros" EntitySet="Livros" />
+      <End Role="Details_Emprestimo" EntitySet="Details_Emprestimo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Emprestim__id_ut__3B75D760" Association="Self.FK__Emprestim__id_ut__3B75D760">
+      <End Role="Utentes" EntitySet="Utentes" />
+      <End Role="Emprestimos" EntitySet="Emprestimos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__logins__id_funci__403A8C7D" Association="Self.FK__logins__id_funci__403A8C7D">
+      <End Role="Funcionarios" EntitySet="Funcionarios" />
+      <End Role="logins" EntitySet="logins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LivroAuto__idLiv__2B3F6F97" Association="Self.FK__LivroAuto__idLiv__2B3F6F97">
+      <End Role="Livros" EntitySet="Livros" />
+      <End Role="Livro_Autor" EntitySet="Livro_Autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__logins__id_utent__38996AB5" Association="Self.FK__logins__id_utent__38996AB5">
+      <End Role="Utentes" EntitySet="Utentes" />
+      <End Role="logins" EntitySet="logins" />
+    </AssociationSet>
+    <FunctionImport Name="sp_criarLivroAutor" ReturnType="Collection(DataModel.sp_criarLivroAutor_Result)">
+      <Parameter Name="idbook" Mode="In" Type="Int32" />
+      <Parameter Name="titulo_livro" Mode="In" Type="String" />
+      <Parameter Name="editorProdutora_livro" Mode="In" Type="String" />
+      <Parameter Name="genero_livro" Mode="In" Type="String" />
+      <Parameter Name="qtd_livro" Mode="In" Type="Int32" />
+      <Parameter Name="obs_livro" Mode="In" Type="String" />
+      <Parameter Name="isbn_livro" Mode="In" Type="Int64" />
+      <Parameter Name="numpaginas_livro" Mode="In" Type="Int32" />
+      <Parameter Name="piccapa_livro" Mode="In" Type="Binary" />
+      <Parameter Name="nome_autor" Mode="In" Type="String" />
+      <Parameter Name="email_autor" Mode="In" Type="String" />
+      <Parameter Name="obs_autor" Mode="In" Type="String" />
+      <Parameter Name="dataNascimento_autor" Mode="In" Type="DateTime" />
+      <Parameter Name="flagAtivo_livro" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getAllEmprestimos" ReturnType="Collection(DataModel.sp_getAllEmprestimos_Result)" />
+    <FunctionImport Name="sp_GetEmprestimo" ReturnType="Collection(DataModel.sp_GetEmprestimo_Result)">
+      <Parameter Name="emprestimoID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetEmprestimoUtente" ReturnType="Collection(DataModel.sp_GetEmprestimoUtente_Result)">
+      <Parameter Name="utenteID" Mode="In" Type="Int32" />
+      <Parameter Name="emprestimoID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getLivro" ReturnType="Collection(DataModel.sp_getLivro_Result)">
+      <Parameter Name="livroID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ListaLivroAutores" ReturnType="Collection(DataModel.sp_ListaLivroAutores_Result)" />
+    <FunctionImport Name="sp_procurarLivro" ReturnType="Collection(DataModel.sp_procurarLivro_Result)">
+      <Parameter Name="tituloLivro" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_criarLivroAutor_Result">
+    <Property Type="Int32" Name="id_Livro" Nullable="false" />
+    <Property Type="Int32" Name="id_Autor" Nullable="false" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="nome_autor" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="obs_livro" Nullable="true" />
+    <Property Type="Int64" Name="isbn_livro" Nullable="false" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="email_autor" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="obs_autor" Nullable="true" />
+    <Property Type="DateTime" Name="dataNascimento_autor" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="flagAtivo" Nullable="true" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_getAllEmprestimos_Result">
+    <Property Type="Int32" Name="id_livro" Nullable="false" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="flagAtivo" Nullable="true" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="obs_livro" Nullable="true" />
+    <Property Type="Int64" Name="isbn_livro" Nullable="false" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="nome_autor" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="id_autor" Nullable="false" />
+    <Property Type="Int32" Name="id_emprestimo" Nullable="false" />
+    <Property Type="Int32" Name="id_utente" Nullable="false" />
+    <Property Type="DateTime" Name="data_requisicao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_devolucao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_entrega_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="obs_emprestimo" Nullable="true" />
+    <Property Type="String" Name="status_emprestimo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="multa_valor_emprestimo" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="flagAtiva" Nullable="true" />
+    <Property Type="Int32" Name="id_utente1" Nullable="false" />
+    <Property Type="String" Name="nome_utente" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="endereco_utente" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="dta_nascim_utente" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="num_tlm_utente" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetEmprestimo_Result">
+    <Property Type="Int32" Name="id_emprestimo" Nullable="true" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="data_requisicao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_devolucao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_entrega_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="obs_emprestimo" Nullable="true" />
+    <Property Type="String" Name="status_emprestimo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="multa_valor_emprestimo" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="flagAtiva" Nullable="true" />
+    <Property Type="Int32" Name="id_utente" Nullable="true" />
+    <Property Type="String" Name="nome_utente" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="endereco_utente" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="dta_nascim_utente" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="num_tlm_utente" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_GetEmprestimoUtente_Result">
+    <Property Type="Int32" Name="id_emprestimo" Nullable="true" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="data_requisicao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_devolucao_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="data_entrega_emprestimo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="obs_emprestimo" Nullable="true" />
+    <Property Type="String" Name="status_emprestimo" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="multa_valor_emprestimo" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="flagAtiva" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_getLivro_Result">
+    <Property Type="Int32" Name="id_livro" Nullable="true" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="flagAtivo" Nullable="true" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="obs_livro" Nullable="true" />
+    <Property Type="Int64" Name="isbn_livro" Nullable="true" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="nome_autor" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="id_autor" Nullable="true" />
+    <Property Type="String" Name="obs_autor" Nullable="true" />
+    <Property Type="String" Name="email_autor" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_ListaLivroAutores_Result">
+    <Property Type="Int32" Name="id_Livro" Nullable="false" />
+    <Property Type="Int32" Name="id_Autor" Nullable="false" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="nome_autor" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="obs_livro" Nullable="true" />
+    <Property Type="Int64" Name="isbn_livro" Nullable="false" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="email_autor" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="obs_autor" Nullable="true" />
+    <Property Type="DateTime" Name="dataNascimento_autor" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="flagAtivo" Nullable="true" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_procurarLivro_Result">
+    <Property Type="Int32" Name="id_livro" Nullable="true" />
+    <Property Type="String" Name="titulo_livro" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="editorProdutora_livro" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="genero_livro" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="flagAtivo" Nullable="true" />
+    <Property Type="Int32" Name="qtd_livro" Nullable="true" />
+    <Property Type="String" Name="obs_livro" Nullable="true" />
+    <Property Type="Int64" Name="isbn_livro" Nullable="true" />
+    <Property Type="Int32" Name="numpaginas_livro" Nullable="true" />
+    <Property Type="Binary" Name="piccapa_livro" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="nome_autor" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="id_autor" Nullable="true" />
+    <Property Type="String" Name="obs_autor" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.LivroModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo_livro)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.genero_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtd_livro)
+        </th>
+  
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_livro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.titulo_livro)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.genero_livro)
+            </td>
+
+            <td>
+                1
+            </td>
+   
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Remover", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+@*<p>
+    @Html.ActionLink("Finalizar", "Create")
+</p>*@
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Entrar" class="btn btn-default" />
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.LivroModel>
+
+@{
+    ViewBag.Title = "IndexLists";
+}
+
+<h2>IndexLists</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.editorProdutora_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.genero_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flagAtivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qtd_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obs_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isbn_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numpaginas_livro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.editorProdutora_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.genero_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.flagAtivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qtd_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obs_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isbn_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numpaginas_livro)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

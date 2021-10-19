@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.UtentesModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Utentes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="table-heading  bg-dark text-white">
+
+        <tr style="background-color: black; color: white;">
+            <th>
+                @Html.DisplayNameFor(model => model.id_utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome_utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endereco_utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dta_nascim_utente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.num_tlm_utente)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_utente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome_utente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endereco_utente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dta_nascim_utente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.num_tlm_utente)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.id_utente }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_utente }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+</table>

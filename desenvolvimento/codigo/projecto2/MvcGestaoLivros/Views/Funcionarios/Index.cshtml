@@ -1,0 +1,119 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.FuncionariosModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Funcionários</h2>
+@*: #1A1818*@
+
+
+<a href="@Url.Action("Create", "Funcionarios")"
+   class="btn btn-success">
+    <i class="glyphicon glyphicon-plus-sign">Criar</i>
+
+</a>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table table-striped">
+    <thead class="table-heading">
+
+        <tr style=" background-color: #3A3636; color: white; ">
+            <th>
+                @Html.DisplayNameFor(model => model.nome_funcionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cc_funcionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data_nascimento_funcionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email_funcionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.contato_funcionario)
+            </th>
+
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_funcionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cc_funcionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_nascimento_funcionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email_funcionario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contato_funcionario)
+            </td>
+
+            <td>
+                <a href="@Url.Action("Edit", "Funcionarios", new { id = item.id_funcionario })"
+                   class="btn btn-warning">
+                    <i class="glyphicon glyphicon-edit"></i>
+
+                </a>
+                <a href="@Url.Action("Details", "Funcionarios", new { id = item.id_funcionario })"
+                   class="btn btn-info">
+
+                    <i class="glyphicon glyphicon-info-sign"></i>
+
+                </a>
+                <a href="@Url.Action("Delete", "Funcionarios", new { id = item.id_funcionario })" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-remove"></i>
+
+                </a>
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*glyphicon glyphicon-new-window
+        @Html.ActionLink("Edit", "Edit", new { id = item.id_funcionario }) |
+    @Html.ActionLink("Details", "Details", new { id = item.id_funcionario }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.id_funcionario })
+    @Html.ActionLink("Edit", "Edit", new { id = item.id_funcionario })*@
+
+@section scripts{
+    <script>
+        $(function () {
+            var sucessMessage = '@TempData["SuccessMessage"]'
+            if (sucessMessage != "" || sucessMessage.length > 5)
+                alertify.success(sucessMessage);
+
+        });
+
+
+        function Deletes(id) {
+            let str2 = "Tem a certeza, que quer passar a multa de 150.05€? ";
+            str2 += ' ' + id;
+
+            // confirm dialog
+            alertify.confirm(str2, function (e) {
+                if (e) {
+                    // user clicked "ok"
+                    window.location.href = '@Url.Action("Delete", "Emprestimos")/' + id;
+                } else {
+                    // user clicked "cancel"
+                }
+            });
+        }
+
+    </script>
+}
+

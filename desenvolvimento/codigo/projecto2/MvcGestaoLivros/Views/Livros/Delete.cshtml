@@ -1,0 +1,128 @@
+﻿@model MvcGestaoLivros.Models.LivroAutorViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Tem a certeza que deseja, eliminar este livro?</h3>
+<div>
+    <h4>LivroAutorViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome_autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_autor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.obs_autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.obs_autor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_autor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_autor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.editorProdutora_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.editorProdutora_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.flagAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.flagAtivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtd_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtd_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.obs_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.obs_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isbn_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isbn_livro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numpaginas_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numpaginas_livro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volar a lista", "Index")
+        </div>
+    }
+</div>

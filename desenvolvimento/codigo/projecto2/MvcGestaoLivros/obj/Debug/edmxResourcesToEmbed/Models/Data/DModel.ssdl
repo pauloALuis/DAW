@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMiniProj2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Funcionarios">
+    <Key>
+      <PropertyRef Name="id_funcionario" />
+    </Key>
+    <Property Name="nome_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="cc_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="data_nascimento_funcionario" Type="datetime" />
+    <Property Name="email_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="contato_funcionario" Type="nvarchar" MaxLength="100" />
+    <Property Name="id_funcionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_login" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="logins">
+    <Key>
+      <PropertyRef Name="id_login" />
+    </Key>
+    <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="flagAtiva" Type="bit" />
+    <Property Name="privilegio" Type="bit" />
+  </EntityType>
+  <EntityType Name="Utentes">
+    <Key>
+      <PropertyRef Name="id_utente" />
+    </Key>
+    <Property Name="id_utente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome_utente" Type="nvarchar" MaxLength="100" />
+    <Property Name="endereco_utente" Type="nvarchar" MaxLength="100" />
+    <Property Name="dta_nascim_utente" Type="datetime" />
+    <Property Name="num_tlm_utente" Type="int" />
+    <Property Name="id_login" Type="int" />
+  </EntityType>
+  <Association Name="FK_Funcionarios_logins">
+    <End Role="logins" Type="Self.logins" Multiplicity="1" />
+    <End Role="Funcionarios" Type="Self.Funcionarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="logins">
+        <PropertyRef Name="id_login" />
+      </Principal>
+      <Dependent Role="Funcionarios">
+        <PropertyRef Name="id_login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Utentes_logins">
+    <End Role="logins" Type="Self.logins" Multiplicity="0..1" />
+    <End Role="Utentes" Type="Self.Utentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="logins">
+        <PropertyRef Name="id_login" />
+      </Principal>
+      <Dependent Role="Utentes">
+        <PropertyRef Name="id_login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_CreateFuncionario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+    <Parameter Name="passworduser" Type="nvarchar" Mode="In" />
+    <Parameter Name="nome_funcionario" Type="nvarchar" Mode="In" />
+    <Parameter Name="cc_funcionario" Type="nvarchar" Mode="In" />
+    <Parameter Name="data_nascimento_funcionario" Type="datetime" Mode="In" />
+    <Parameter Name="contato_funcionario" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_CreateUtente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+    <Parameter Name="passworduser" Type="nvarchar" Mode="In" />
+    <Parameter Name="nome_utente" Type="nvarchar" Mode="In" />
+    <Parameter Name="endereco_utente" Type="nvarchar" Mode="In" />
+    <Parameter Name="dta_nascim_utente" Type="datetime" Mode="In" />
+    <Parameter Name="num_tlm_utente" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="dbMiniProj2ModelStoreContainer">
+    <EntitySet Name="Funcionarios" EntityType="Self.Funcionarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logins" EntityType="Self.logins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utentes" EntityType="Self.Utentes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Funcionarios_logins" Association="Self.FK_Funcionarios_logins">
+      <End Role="logins" EntitySet="logins" />
+      <End Role="Funcionarios" EntitySet="Funcionarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Utentes_logins" Association="Self.FK_Utentes_logins">
+      <End Role="logins" EntitySet="logins" />
+      <End Role="Utentes" EntitySet="Utentes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

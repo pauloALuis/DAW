@@ -1,0 +1,122 @@
+﻿@model IEnumerable<MvcGestaoLivros.Models.LivrosModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Livros disponíveis</h2>
+<h1></h1>
+<br/>
+
+ @if (Session["id_utente"] == null || (int)Session["id_utente"] <= 0)
+  {
+
+
+    <p>
+        <a href="@Url.Action("Create", "Livros")" class="btn btn-info">
+            <i class="glyphicon glyphicon-book"></i>  Criar Livro
+        </a>
+    </p>
+}
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <label> @ViewBag.Notification</label>
+    </div>
+</div>
+
+<table class="table table-bordered border-primary table-hover">
+    <thead class="table-heading">
+
+
+        <tr>
+            @*  <th>
+                    @Html.DisplayNameFor(model => model.id_Livro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.id_Autor)
+                </th>*@
+            <th style=" background-color: black; color: white;">
+                @Html.DisplayNameFor(model => model.titulo_livro)
+            </th>
+            <th style=" background-color: black; color: white;">
+                @Html.DisplayName("Escritor")
+            </th>
+            <th style=" background-color: black; color: white;">
+                @Html.DisplayNameFor(model => model.genero_livro)
+            </th>
+
+            <th style=" background-color: black; color: white;">
+                @Html.DisplayNameFor(model => model.editorProdutora_livro)
+            </th>
+
+
+            <th style=" background-color: black; color: white;">
+                @Html.DisplayName("Estado")
+            </th>
+
+            <th style=" background-color: black; color: white;">Operações</th>
+        </tr>
+
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.titulo_livro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome_autor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.genero_livro)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.editorProdutora_livro)
+            </td>
+
+            @if (item.qtd_livro <= 0)
+            {
+                <td class="text-danger">
+                    @Html.DisplayName("Indisponível")
+                </td>
+            }
+            else
+            {
+                <td class="text-success">
+                    @Html.DisplayName("Disponível")
+
+                </td>
+            }
+
+
+            <td>
+
+                <a href="@Url.Action("Details", "livros", new { id = item.id_Livro})" class="btn btn-info"> <i class="glyphicon glyphicon-user"> </i></a>
+                @if (Session["id_utente"] == null && (int)Session["id_funcionario"] > 0)
+                {
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "livros", new { id = item.id_Livro})"  >
+                        <i class="glyphicon glyphicon-remove"> </i>
+                    </a>
+                    <a href="@Url.Action("Edit", "Livros", new { id = item.id_Livro})" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"> </i></a>
+
+
+                }
+                else
+                {
+                    <a href="@Url.Action("AddCart", "Livros",new {id = item.id_Livro })"  class="btn btn-success" onclick="this.disabled = true;">
+                        <i class="glyphicon glyphicon-shopping-cart"  > </i>
+                    </a>
+                }
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+
+
+
+</script>
